@@ -1,7 +1,8 @@
-#Project Overview
+# Project Overview
+
 This project aims to provide a user authentication system using Google OAuth and traditional login methods in Django. It also allows users to update their profile data using JavaScript.
 
-###Features
+### Features
 
 - User registration and login: Users can create an account and log in using their email address and password or their Google account via OAuth.
 
@@ -11,7 +12,8 @@ This project aims to provide a user authentication system using Google OAuth and
 
 - Profile editing: Users can update their profile information, including their First Name, Last Name, Email, and Bio using JavaScript to provide a smooth and dynamic user experience.
 
-###Screenshots
+### Screenshots
+
 Here are some screenshots showcasing the user register, login, and login via Google functionality, as well as profile creation and updating using JavaScript:
 
 ![Screenshot](screenshots/djangoAuthProfile-1.png)
