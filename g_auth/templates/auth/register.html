@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+
+{% block c_style %}
+
+<style>
+  .btn-google {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    color: #191919;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .btn-google:hover {
+    background-color: #f1f1f1;
+    color: #4b3b3b;
+  }
+
+  .google-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+  .btn-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+</style>
+
+{% endblock c_style %}
+<!--  -->
+
+{% block title %} Sign Up {% endblock title %}
+
+<!--  -->
+
+{% block container %}
+
+<div class="container w-50 m-auto mt-5">
+  <h1>Register</h1>
+
+  <p>
+    If you have an account, then please
+    <a href="{% url 'account_login' %}">login</a>
+  </p>
+
+  <div class="sign-up pt-2">
+    <form action="{% url 'users:register' %}" method="post" id="registerA">
+      {% csrf_token %} {{form.as_p}}
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+  </div>
+
+  <div class="con-google mt-3">
+    <form action="{% url 'google_login' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn-google">
+        <img
+          src="{% static 'icons/google-logo.png' %}"
+          alt=""
+          class="google-logo"
+        />
+        <span class="btn-text">Continue With Google</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock container %}
+<!--  -->

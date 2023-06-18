@@ -1,0 +1,91 @@
+{% extends "account/base.html" %} {% load i18n %}
+<!--  -->
+{% load account socialaccount %} {% load static %}
+<!--  -->
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+<!--  -->
+
+{% block extra_head %}
+
+<style>
+  .btn-google {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    color: #191919;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .btn-google:hover {
+    background-color: #f1f1f1;
+    color: #4b3b3b;
+  }
+
+  .google-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+  .btn-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+</style>
+{% endblock %}
+<!--  -->
+
+{% block body %}
+<!--  -->
+
+{% include 'base.html' %}
+
+<!--  -->
+{% block content %}
+
+<div class="container p-5 w-50 m-auto">
+  <h1>{% trans "Sign In" %}</h1>
+
+  <p>
+    If you have not created an account yet, then please
+    <a href="{% url 'users:register' %}">sign up</a>
+  </p>
+
+  <div class="login-area-combo">
+    <div class="row-login">
+      <form
+        class="login"
+        id="logOauth"
+        method="POST"
+        action="{% url 'account_login' %}"
+      >
+        {% csrf_token %} {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">
+          {% trans "Sign In" %}
+        </button>
+      </form>
+    </div>
+    <div class="oauth-login mt-2">
+      <form action="{% url 'google_login' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-google">
+          <img
+            src="{% static 'icons/google-logo.png' %}"
+            alt=""
+            class="google-logo"
+          />
+          <span class="btn-text">Continue With Google</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+<!--  -->
+
+{% endblock body %}

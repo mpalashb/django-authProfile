@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block title %} Create Profile {% endblock title %}
+
+<!--  -->
+
+<!--  -->
+
+{% block container %}
+<div class="container py-4">
+  {% if request.user.profile %}
+  <h1 class="text-center text-capitalize text-dark">
+    You already have a profile!
+  </h1>
+  <div class="btn-are d-flex justify-content-center">
+    <a class="btn btn-primary" href="{% url 'users:dash' %}">Dashboard</a>
+  </div>
+
+  {% else %}
+
+  <h1 class="text-center text-capitalize text-dark">Create a profile!</h1>
+
+  <div class="create-profile">
+    <form action="{% url 'users:create-profile' %}" method="post">
+      {% csrf_token %} {{form.as_p}}
+      <div class="btn-area d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+
+  {% endif %}
+</div>
+
+{% endblock container %}
+<!--  -->

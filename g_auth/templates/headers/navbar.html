@@ -1,0 +1,53 @@
+<nav class="navbar navbar-light" style="background-color: #746d6d">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'users:home' %}"
+      >Django<span style="color: #ff9d57; font-weight: 700">Auth</span
+      >Profile</a
+    >
+    <div class="navbar-expand" id="navbarText">
+      {% if request.user.is_authenticated %}
+      <!--  -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if not request.user.profile %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:create-profile' %}"
+            >Create Profile</a
+          >
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link dash-link" href="{% url 'users:dash' %}"
+            >Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <form action="{% url 'account-logout' %}" method="post">
+            {% csrf_token %}
+            <button
+              class="nav-link border-none bg-danger"
+              style="
+                border: none;
+                border-radius: 2px;
+                padding-left: 20px;
+                padding-right: 20px;
+              "
+            >
+              Logout
+            </button>
+          </form>
+        </li>
+      </ul>
+      {% else %}
+      <!--  -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+        </li>
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</nav>

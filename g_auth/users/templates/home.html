@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% load socialaccount %}
+<!--  -->
+
+{% block title %} Home {% endblock title %}
+<!--  -->
+{% block c_style %}
+<style>
+  .btn-google {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    color: #191919;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .btn-google:hover {
+    background-color: #f1f1f1;
+    color: #4b3b3b;
+  }
+
+  .google-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+  .btn-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+</style>
+{% endblock c_style %}
+<!--  -->
+
+{% block container %}
+
+<div class="container">
+  <div
+    class="hero-content py-5 d-flex justify-content-center flex-column align-items-center gap-3"
+  >
+    <h1 class="text-dark text-capitalize text-center">
+      Unleash the Potential of Your Personal Profile
+    </h1>
+    <p class="lead w-75 m-auto">
+      Discover the limitless possibilities of our Django-based website, where
+      you can effortlessly create and manage your personal profile using social
+      account login and enjoy seamless CRUD functionality.
+    </p>
+
+    {% if not request.user.is_authenticated %}
+
+    <form action="{% url 'google_login' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn-google">
+        <img
+          src="{% static 'icons/google-logo.png' %}"
+          alt=""
+          class="google-logo"
+        />
+        <span class="btn-text">Continue With Google</span>
+      </button>
+    </form>
+    {% else %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Welcome {{ request.user.first_name }}!</h5>
+        <p class="card-text">
+          You are logged in as a
+          <span class="text-info fw-bold">{{ request.user }}</span> user!
+        </p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock container %}
+<!--  -->

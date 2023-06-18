@@ -1,0 +1,100 @@
+{% extends "socialaccount/base.html" %}
+<!--  -->
+
+{% load i18n %}
+<!--  -->
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+<!--  -->
+
+{% block body %}
+
+<div class="container pt-5">
+  {% if messages %}
+  <div>
+    <strong>{% trans "Messages:" %}</strong>
+    <ul>
+      {% for message in messages %}
+      <li>{{message}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <!-- <div>
+    <ul class="list-unstyled">
+      {% if user.is_authenticated %}
+      <li>
+        <a href="{% url 'account_email' %}" class="btn btn-link"
+          >{% trans "Change E-mail" %}</a
+        >
+      </li>
+      <li>
+        <a href="{% url 'account_logout' %}" class="btn btn-link"
+          >{% trans "Sign Out" %}</a
+        >
+      </li>
+      {% else %}
+      <li class="">
+        <a href="{% url 'account_login' %}" class="btn btn-link"
+          >{% trans "Sign In" %}</a
+        >
+      </li>
+      <li>
+        <a href="{% url 'account_signup' %}" class="btn btn-link"
+          >{% trans "Sign Up" %}</a
+        >
+      </li>
+      {% endif %}
+    </ul>
+  </div> -->
+
+  <!--  -->
+
+  {% block content %}
+  <!--  -->
+  {% if process == "connect" %}
+  <!--  -->
+  <h1>
+    {% blocktrans with provider.name as provider %}Connect {{ provider }}
+    <!--  -->
+    {% endblocktrans %}
+  </h1>
+  <!--  -->
+  <p>
+    {% blocktrans with provider.name as provider %}You are about to connect a
+    new third party account from {{ provider }}.
+    <!--  -->
+    {% endblocktrans %}
+  </p>
+
+  {% else %}
+
+  <h1>
+    {% blocktrans with provider.name as provider %}Sign In Via {{ provider }}
+    <!--  -->
+    {% endblocktrans %}
+  </h1>
+
+  <p>
+    {% blocktrans with provider.name as provider %}You are about to sign in
+    using a third party account from {{ provider }}
+    <!--  -->
+
+    {% endblocktrans %}
+  </p>
+
+  <!--  -->
+  {% endif %}
+  <!--  -->
+  <form action="{% url 'google_login' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-secondary">
+      {% trans "Continue" %}
+    </button>
+  </form>
+  <!--  -->
+
+  {% endblock %}
+</div>
+<!--  -->
+{% endblock %}
